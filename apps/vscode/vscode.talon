@@ -65,6 +65,7 @@ file hunt (pace | paste):
   sleep(50ms)
   edit.paste()
 file copy name: user.vscode("fileutils.copyFileName")
+file open: key(ctrl-o)
 file copy path: user.vscode("copyFilePath")
 file copy local [path]: user.vscode("copyRelativeFilePath")
 file create sibling: user.vscode_and_wait("explorer.newFile")

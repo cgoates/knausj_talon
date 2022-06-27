@@ -15,7 +15,15 @@ rerun [<user.text>]: user.terminal_rerun_search(text or "")
 rerun search: user.terminal_rerun_search("")
 kill all: user.terminal_kill_all()
 
+make dir: "mkdir "
+
+zulu [<user.text>]: "z {text}"
+
 copy paste:
     edit.copy()
     sleep(50ms)
     edit.paste()
+
+each top:
+    insert("htop")
+    key("enter")

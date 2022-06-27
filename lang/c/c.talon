@@ -93,3 +93,7 @@ toggle includes: user.code_toggle_libraries()
 include <user.code_libraries>:
     user.code_insert_library(code_libraries, "")
     key(end enter)
+
+see out: "std::cout << "
+
+end line: "std::endl"

@@ -34,6 +34,8 @@ mac_application_directories = [
     "/System/Applications/Utilities",
 ]
 
+linux_application_directories = ["/usr/share/applications"]
+
 words_to_exclude = [
     "zero",
     "one",
@@ -159,6 +161,24 @@ if app.platform == "windows":
             # 'cause I don't think we don't want 'em
             if "install" not in name.lower():
                 items[name] = app_user_model_id
+
+        return items
+
+if app.platform == "linux":
+    def get_linux_apps():
+        items = {}
+        for base in linux_application_directories:
+            if os.path.isdir(base):
+                for name in os.listdir(base):
+                    if name.endswith(".desktop"):
+                        path = os.path.join(base, name)
+                        with open(path) as f:
+                            file_text = f.read()
+                            if "NoDisplay=true" not in file_text:
+                                lines = file_text.splitlines()
+                                names = [line.replace("Name=","") for line in lines if line.startswith("Name=")]
+                                execs = [line.replace("Exec=","") for line in lines if line.startswith("Exec=")]
+                                items[names[0]] = execs[0]
 
         return items
 
@@ -339,6 +359,8 @@ def update_launch_list():
     elif app.platform == "windows":
         launch = get_windows_apps()
         # actions.user.talon_pretty_print(launch)
+    elif app.platform == "linux":
+        launch = get_linux_apps()
 
     ctx.lists["self.launch"] = actions.user.create_spoken_forms_from_map(
         launch, words_to_exclude
