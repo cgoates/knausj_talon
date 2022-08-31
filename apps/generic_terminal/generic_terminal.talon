@@ -27,3 +27,10 @@ copy paste:
 each top:
     insert("htop")
     key("enter")
+
+tee mux: "tmux\n"
+tee mux attach: "tmux attach\n"
+
+run test: "bin/Release/Test_"
+run debug test: "bin/Debug/Test_"
+lldb that: "lldb -o run !!\n"

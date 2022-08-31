@@ -30,41 +30,67 @@ ctx.lists["self.c_signed"] = {
 
 ctx.lists["self.c_keywords"] = {
     "static": "static",
-    "volatile": "volatile",
-    "register": "register",
+    #"volatile": "volatile",
+    #"register": "register",
 }
 
-ctx.lists["self.stdint_types"] = {
-    "character": "int8_t",
-    "char": "int8_t",
-    "short": "int16_t",
-    "long": "int32_t",
-    "long long": "int64_t",
-    "int": "int32_t",
-    "integer": "int32_t",
-    "void": "void",
-    "double": "double",
-    "struct": "struct",
-    "struck": "struct",
-    "num": "enum",
-    "union": "union",
-    "float": "float",
+ctx.lists["self.std_types"] = {
+    "string": "string",
+    "vector": "vector",
+    "set": "set",
+    "map": "map",
+    "pair": "pair",
+    "reference wrapper": "reference_wrapper",
+    "unique pointer": "unique_ptr",
+    "make unique": "make_unique",
+    "shared pointer": "shared_ptr",
+    "make shared": "make_shared",
+    "see ref": "cref",
+    "ref": "ref",
+    "transform reduce": "transform_reduce",
+    "transform": "transform",
+    "function": "function",
+}
+
+ctx.lists["self.util_types"] = {
+    "fast vector": "FastVector",
+    "dim id": "DimId",
+    "equals": "equals",
+    "match": "match",
+    "contains": "contains",
+    "maybe": "Maybe",
+    "just": "Just",
+    "nothing": "Nothing",
+    "json object": "JSONObject",
+    "orange": "orange()",
+    "reset line": "resetl",
+    "default value map": "DefaultValueMap",
+    "green": "green()",
+}
+
+ctx.lists["self.eigen_types"] = {
+    "matrix ex dee": "MatrixXd",
+    "vector ex dee": "VectorXd",
+    "vector three dee": "Vector3d",
+    "vector two dee": "Vector2d",
+    "index": "Index",
+    "all": "all",
 }
 
 ctx.lists["self.c_types"] = {
     "character": "char",
     "char": "char",
-    "short": "short",
-    "long": "long",
+    # "short": "short",
+    # "long": "long",
     "int": "int",
     "integer": "int",
     "void": "void",
     "double": "double",
     "struct": "struct",
     "struck": "struct",
-    "num": "enum",
-    "union": "union",
-    "float": "float",
+    # "num": "enum",
+    # "union": "union",
+    # "float": "float",
 }
 
 ctx.lists["user.code_libraries"] = {
@@ -135,6 +161,9 @@ mod.list("c_pointers", desc="Common C pointers")
 mod.list("c_signed", desc="Common C datatype signed modifiers")
 mod.list("c_keywords", desc="C keywords")
 mod.list("c_types", desc="Common C types")
+mod.list("std_types", desc="Common std types")
+mod.list("eigen_types", desc="Common Eigen types")
+mod.list("util_types", desc="Common util types")
 mod.list("stdint_types", desc="Common stdint C types")
 mod.list("stdint_signed", desc="Common stdint C datatype signed modifiers")
 
@@ -169,10 +198,20 @@ def c_types(m) -> str:
     return m.c_types
 
 
-@mod.capture(rule="{self.stdint_types}")
-def stdint_types(m) -> str:
+@mod.capture(rule="{self.std_types}")
+def std_types(m) -> str:
     "Returns a string"
-    return m.stdint_types
+    return m.std_types
+
+@mod.capture(rule="{self.util_types}")
+def util_types(m) -> str:
+    "Returns a string"
+    return m.util_types
+
+@mod.capture(rule="{self.eigen_types}")
+def eigen_types(m) -> str:
+    "Returns a string"
+    return m.eigen_types
 
 
 @mod.capture(rule="{self.stdint_signed}")
@@ -185,12 +224,6 @@ def stdint_signed(m) -> str:
 def c_cast(m) -> str:
     "Returns a string"
     return "(" + " ".join(list(m)) + ")"
-
-
-@mod.capture(rule="[<self.stdint_signed>] <self.stdint_types> [<self.c_pointers>+]")
-def c_stdint_cast(m) -> str:
-    "Returns a string"
-    return "(" + "".join(list(m)) + ")"
 
 
 @mod.capture(rule="[<self.c_signed>] <self.c_types> [<self.c_pointers>]")
@@ -332,7 +365,8 @@ class UserActions:
         actions.edit.up()
 
     def code_state_for():
-        actions.auto_insert("for ")
+        actions.auto_insert("for()")
+        actions.edit.left()
 
     def code_state_go_to():
         actions.auto_insert("goto ")

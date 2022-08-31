@@ -35,17 +35,17 @@ state include local:
     user.insert_between('#include "', '"')
 state type deaf:
     insert('typedef ')
-state type deaf struct:
-    insert('typedef struct')
-    insert('{\n\n}')
-    edit.up()
-    key('tab')
+#state type deaf struct:
+#    insert('typedef struct')
+#    insert('{\n\n}')
+#    edit.up()
+#    key('tab')
 
 
 # XXX - create a preprocessor tag for these, as they will match cpp, etc
-state define: "#define "
-state undefine: "#undef "
-state if define: "#ifdef "
+#state define: "#define "
+#state undefine: "#undef "
+#state if define: "#ifdef "
 
 # XXX - preprocessor instead of pre?
 state pre if: "#if "
@@ -61,31 +61,33 @@ state default: "default:\nbreak;"
 #if so uncomment the two lines and comment out the rest accordingly
 push brackets:
     edit.line_end()
-    #insert("{")
+    insert("{")
+    key(enter)
+    #insert("{}")
+    #edit.left()
     #key(enter)
-    insert("{}")
-    edit.left()
-    key(enter)
-    key(enter)
-    edit.up()
+    #key(enter)
+    #edit.up()
 
 # Declare variables or structs etc.
 # Ex. * int myList
-<user.c_variable> <phrase>:
-    insert("{c_variable} ")
-    insert(user.formatted_text(phrase, "PRIVATE_CAMEL_CASE,NO_SPACES"))
+#<user.c_variable> <phrase>:
+#    insert("{c_variable} ")
+#    insert(user.formatted_text(phrase, "PRIVATE_CAMEL_CASE,NO_SPACES"))
 
-<user.c_variable> <user.letter>:
-    insert("{c_variable} {letter} ")
+#<user.c_variable> <user.letter>:
+#    insert("{c_variable} {letter} ")
 
 # Ex. (int *)
-cast to <user.c_cast>: "{c_cast}"
-standard cast to <user.stdint_cast>: "{stdint_cast}"
-<user.c_types>: "{c_types}"
-<user.c_pointers>: "{c_pointers}"
+#cast to <user.c_cast>: "{c_cast}"
+#standard cast to <user.stdint_cast>: "{stdint_cast}"
+type <user.c_types>: "{c_types}"
+#<user.c_pointers>: "{c_pointers}"
 <user.c_keywords>: "{c_keywords}"
 <user.c_signed>: "{c_signed}"
-standard <user.stdint_types>: "{stdint_types}"
+standard <user.std_types>: "std::{std_types}"
+eigen <user.eigen_types>: "Eigen::{eigen_types}"
+util <user.util_types>: "util::{util_types}"
 int main:
     user.insert_between("int main(", ")")
 

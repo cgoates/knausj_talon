@@ -137,6 +137,7 @@ punctuation_words = {
     "half stack": ";",
     "stack": ":",
     "forward slash": "/",
+    "slash": "/",
     "question mark": "?",
     "exclamation mark": "!",
     "exclamation point": "!",
@@ -149,7 +150,6 @@ punctuation_words = {
     "ampersand": "&",
     # Currencies
     "dollar sign": "$",
-    "dollar": "$",
     "pound sign": "£",
 }
 symbol_key_words = {
@@ -163,7 +163,7 @@ symbol_key_words = {
     "square": "[",
     "R square": "]",
     "right square": "]",
-    "slash": "/",
+    "question": "?",
     "backslash": "\\",
     "minus": "-",
     "dash": "-",
@@ -176,6 +176,7 @@ symbol_key_words = {
     "paren": "(",
     "L paren": "(",
     "left paren": "(",
+    "parener": ")",
     "R paren": ")",
     "right paren": ")",
     "curly": "{",
@@ -198,7 +199,7 @@ symbol_key_words = {
     "double quote": '"',
     # Currencies
     "dollar": "$",
-    "pound": "£",
+    "pound": "#",
 }
 
 # make punctuation words also included in {user.symbol_keys}
