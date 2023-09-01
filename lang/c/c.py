@@ -30,6 +30,7 @@ ctx.lists["self.c_signed"] = {
 
 ctx.lists["self.c_keywords"] = {
     "static": "static",
+    "const": "const",
     #"volatile": "volatile",
     #"register": "register",
 }
@@ -40,6 +41,7 @@ ctx.lists["self.std_types"] = {
     "set": "set",
     "map": "map",
     "pair": "pair",
+    "optional": "optional",
     "reference wrapper": "reference_wrapper",
     "unique pointer": "unique_ptr",
     "make unique": "make_unique",
@@ -47,6 +49,7 @@ ctx.lists["self.std_types"] = {
     "make shared": "make_shared",
     "see ref": "cref",
     "ref": "ref",
+    "get": "get",
     "transform reduce": "transform_reduce",
     "transform": "transform",
     "function": "function",
@@ -54,6 +57,8 @@ ctx.lists["self.std_types"] = {
 
 ctx.lists["self.util_types"] = {
     "fast vector": "FastVector",
+    "growable vector": "GrowableVector",
+    "igx exception": "IGXException",
     "dim id": "DimId",
     "equals": "equals",
     "match": "match",
@@ -66,6 +71,10 @@ ctx.lists["self.util_types"] = {
     "reset line": "resetl",
     "default value map": "DefaultValueMap",
     "green": "green()",
+    "vector three de max": "Vector3dMax",
+    "ess pee matrix ex de are em": "SpMatrixXdRm",
+    "ess pee matrix ex de see em": "SpMatrixXdCm",
+    "ess pee vector ex de": "SpVectorXd",
 }
 
 ctx.lists["self.eigen_types"] = {
@@ -75,6 +84,21 @@ ctx.lists["self.eigen_types"] = {
     "vector two dee": "Vector2d",
     "index": "Index",
     "all": "all",
+    "triplet": "Triplet",
+}
+
+ctx.lists["self.topo_types"] = {
+    "cell type vertex": "CellType::Vertex",
+    "cell type edge": "CellType::Edge",
+    "cell type face": "CellType::Face",
+    "cell type volume": "CellType::Volume",
+    "dynamic cell": "DynamicCell",
+    "dynamic dart": "DynamicDart",
+    "dynamic vertex": "DynamicVertex",
+    "dynamic edge": "DynamicEdge",
+    "dynamic face": "DynamicFace",
+    "dynamic volume": "DynamicVolume",
+    "F N topology": "FnTopology"
 }
 
 ctx.lists["self.c_types"] = {
@@ -164,6 +188,7 @@ mod.list("c_types", desc="Common C types")
 mod.list("std_types", desc="Common std types")
 mod.list("eigen_types", desc="Common Eigen types")
 mod.list("util_types", desc="Common util types")
+mod.list("topo_types", desc="Common topo types")
 mod.list("stdint_types", desc="Common stdint C types")
 mod.list("stdint_signed", desc="Common stdint C datatype signed modifiers")
 
@@ -207,6 +232,11 @@ def std_types(m) -> str:
 def util_types(m) -> str:
     "Returns a string"
     return m.util_types
+
+@mod.capture(rule="{self.topo_types}")
+def topo_types(m) -> str:
+    "Returns a string"
+    return m.topo_types
 
 @mod.capture(rule="{self.eigen_types}")
 def eigen_types(m) -> str:
@@ -345,8 +375,8 @@ class UserActions:
         actions.auto_insert(" != NULL")
 
     def code_state_if():
-        actions.insert("if () {\n}\n")
-        actions.key("up:2 left:3")
+        actions.insert("if(  ){}")
+        actions.key("left:2 enter right enter:2 up:3 right:4")
 
     def code_state_else_if():
         actions.insert("else if () {\n}\n")
@@ -365,7 +395,8 @@ class UserActions:
         actions.edit.up()
 
     def code_state_for():
-        actions.auto_insert("for()")
+        actions.auto_insert("for(  )")
+        actions.edit.left()
         actions.edit.left()
 
     def code_state_go_to():

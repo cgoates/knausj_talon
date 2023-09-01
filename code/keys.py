@@ -228,7 +228,8 @@ simple_keys = [
 
 alternate_keys = {
     "chuck": "backspace",
-    "forward chuck": "delete",
+    "wipe": "backspace",
+    "chucker": "delete",
     #'junk': 'backspace',
     "forward delete": "delete",
     "page up": "pageup",

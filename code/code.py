@@ -36,6 +36,7 @@ language_extensions = {
     "ruby": "rb",
     "rust": "rs",
     "scala": "scala",
+    "scribble": "scrbl",
     "scss": "scss",
     # 'snippets': 'snippets',
     "sql": "sql",

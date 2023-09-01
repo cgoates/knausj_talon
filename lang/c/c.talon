@@ -28,13 +28,9 @@ settings():
 
 # NOTE: migrated from generic, as they were only used here, though once cpp support is added, perhaps these should be migrated to a tag together with the commands below
 state include:
-    insert('#include ')
-state include system:
-    user.insert_between("#include <", ">")
-state include local:
-    user.insert_between('#include "', '"')
-state type deaf:
-    insert('typedef ')
+    user.insert_between("#include<", ">")
+#state type deaf:
+#    insert('typedef ')
 #state type deaf struct:
 #    insert('typedef struct')
 #    insert('{\n\n}')
@@ -60,14 +56,8 @@ state default: "default:\nbreak;"
 #the below example may not work in editors that automatically add the closing bracket
 #if so uncomment the two lines and comment out the rest accordingly
 push brackets:
-    edit.line_end()
-    insert("{")
+    user.insert_between("{", "}")
     key(enter)
-    #insert("{}")
-    #edit.left()
-    #key(enter)
-    #key(enter)
-    #edit.up()
 
 # Declare variables or structs etc.
 # Ex. * int myList
@@ -84,12 +74,17 @@ push brackets:
 type <user.c_types>: "{c_types}"
 #<user.c_pointers>: "{c_pointers}"
 <user.c_keywords>: "{c_keywords}"
-<user.c_signed>: "{c_signed}"
+#<user.c_signed>: "{c_signed}"
 standard <user.std_types>: "std::{std_types}"
+const standard <user.std_types>: "const std::{std_types}"
 eigen <user.eigen_types>: "Eigen::{eigen_types}"
+const eigen <user.eigen_types>: "const Eigen::{eigen_types}"
 util <user.util_types>: "util::{util_types}"
-int main:
-    user.insert_between("int main(", ")")
+const util <user.util_types>: "const util::{util_types}"
+topo <user.topo_types>: "topo::{topo_types}"
+const topo <user.topo_types>: "const topo::{topo_types}"
+# int main:
+#     user.insert_between("int main(", ")")
 
 toggle includes: user.code_toggle_libraries()
 include <user.code_libraries>:
@@ -99,3 +94,27 @@ include <user.code_libraries>:
 see out: "std::cout << "
 
 end line: "std::endl"
+
+size tea: "size_t"
+const size tea: "const size_t"
+
+const auto: "const auto"
+
+boo: "bool"
+const boo: "const bool"
+
+streamer: " << "
+
+see out throw exception at:
+    user.insert_between("COUT_THROW_EXCEPTION_AT( util::IGXException, \"", "\" );")
+
+assert:
+    user.insert_between("TS_ASSERT( ", " );")
+
+assert equals:
+    user.insert_between("TS_ASSERT_EQUALS( ", " );")
+
+hammer parent point: "ParentPoint"
+
+lambda:
+    user.insert_between("[&]( ", " ) {}" )
