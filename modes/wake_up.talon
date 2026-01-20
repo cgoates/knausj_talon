@@ -14,5 +14,8 @@ mode: all
     speech.disable()
     user.engine_sleep()
 #^talon sleep [<phrase>]$: speech.disable()
-^drowse [<phrase>]$: speech.disable()
-^talon wake$: speech.enable()
+^drowse [<phrase>]$: 
+    speech.disable()
+    user.disconnect_ocr_eye_tracker()
+^talon wake$:
+    speech.enable()

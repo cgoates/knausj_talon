@@ -55,50 +55,33 @@ ctx.lists["self.std_types"] = {
     "function": "function",
 }
 
-ctx.lists["self.util_types"] = {
-    "fast vector": "FastVector",
-    "growable vector": "GrowableVector",
-    "igx exception": "IGXException",
-    "dim id": "DimId",
-    "equals": "equals",
-    "match": "match",
-    "contains": "contains",
-    "maybe": "Maybe",
-    "just": "Just",
-    "nothing": "Nothing",
-    "json object": "JSONObject",
-    "orange": "orange()",
-    "reset line": "resetl",
-    "default value map": "DefaultValueMap",
-    "green": "green()",
-    "vector three de max": "Vector3dMax",
-    "ess pee matrix ex de are em": "SpMatrixXdRm",
-    "ess pee matrix ex de see em": "SpMatrixXdCm",
-    "ess pee vector ex de": "SpVectorXd",
-}
-
 ctx.lists["self.eigen_types"] = {
     "matrix ex dee": "MatrixXd",
+    "matrix three ex dee": "Matrix3Xd",
+    "matrix ex three dee": "MatrixX3d",
     "vector ex dee": "VectorXd",
     "vector three dee": "Vector3d",
     "vector two dee": "Vector2d",
     "index": "Index",
     "all": "all",
     "triplet": "Triplet",
+    "ref": "Ref",
 }
 
 ctx.lists["self.topo_types"] = {
-    "cell type vertex": "CellType::Vertex",
+    "tet mesh combinatorial map": "TetMeshCombinatorialMap",
+    "combinatorial map": "CombinatorialMap",
+    "combinatorial map boundary": "CombinatorialMapBoundary",
+    "combinatorial map restriction": "CombinatorialMapRestriction",
     "cell type edge": "CellType::Edge",
     "cell type face": "CellType::Face",
     "cell type volume": "CellType::Volume",
-    "dynamic cell": "DynamicCell",
-    "dynamic dart": "DynamicDart",
-    "dynamic vertex": "DynamicVertex",
-    "dynamic edge": "DynamicEdge",
-    "dynamic face": "DynamicFace",
-    "dynamic volume": "DynamicVolume",
-    "F N topology": "FnTopology"
+    "cell": "Cell",
+    "dart": "Dart",
+    "vertex": "Vertex",
+    "edge": "Edge",
+    "face": "Face",
+    "volume": "Volume"
 }
 
 ctx.lists["self.c_types"] = {
@@ -187,7 +170,6 @@ mod.list("c_keywords", desc="C keywords")
 mod.list("c_types", desc="Common C types")
 mod.list("std_types", desc="Common std types")
 mod.list("eigen_types", desc="Common Eigen types")
-mod.list("util_types", desc="Common util types")
 mod.list("topo_types", desc="Common topo types")
 mod.list("stdint_types", desc="Common stdint C types")
 mod.list("stdint_signed", desc="Common stdint C datatype signed modifiers")
@@ -227,11 +209,6 @@ def c_types(m) -> str:
 def std_types(m) -> str:
     "Returns a string"
     return m.std_types
-
-@mod.capture(rule="{self.util_types}")
-def util_types(m) -> str:
-    "Returns a string"
-    return m.util_types
 
 @mod.capture(rule="{self.topo_types}")
 def topo_types(m) -> str:

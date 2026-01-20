@@ -28,7 +28,11 @@ settings():
 
 # NOTE: migrated from generic, as they were only used here, though once cpp support is added, perhaps these should be migrated to a tag together with the commands below
 state include:
-    user.insert_between("#include<", ">")
+    user.insert_between("#include <", ">")
+class <user.text>:
+    name = user.formatted_text(text, "PUBLIC_CAMEL_CASE")
+    user.insert_between("class {name}\n{", "};")
+    key( enter )
 #state type deaf:
 #    insert('typedef ')
 #state type deaf struct:
@@ -79,10 +83,8 @@ standard <user.std_types>: "std::{std_types}"
 const standard <user.std_types>: "const std::{std_types}"
 eigen <user.eigen_types>: "Eigen::{eigen_types}"
 const eigen <user.eigen_types>: "const Eigen::{eigen_types}"
-util <user.util_types>: "util::{util_types}"
-const util <user.util_types>: "const util::{util_types}"
-topo <user.topo_types>: "topo::{topo_types}"
-const topo <user.topo_types>: "const topo::{topo_types}"
+topology <user.topo_types>: "topology::{topo_types}"
+const topology <user.topo_types>: "const topology::{topo_types}"
 # int main:
 #     user.insert_between("int main(", ")")
 
@@ -103,7 +105,11 @@ const auto: "const auto"
 boo: "bool"
 const boo: "const bool"
 
+double: "double"
+const double: "const double"
+
 streamer: " << "
+streamy: " >> "
 
 see out throw exception at:
     user.insert_between("COUT_THROW_EXCEPTION_AT( util::IGXException, \"", "\" );")
@@ -113,8 +119,6 @@ assert:
 
 assert equals:
     user.insert_between("TS_ASSERT_EQUALS( ", " );")
-
-hammer parent point: "ParentPoint"
 
 lambda:
     user.insert_between("[&]( ", " ) {}" )

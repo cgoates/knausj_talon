@@ -17,7 +17,7 @@ phrase <user.text> over: user.insert_with_history(text)
 <user.format_text>+ args:
     user.insert_many(format_text_list)
     user.insert_between("(",")")
-<user.formatters> that: user.formatters_reformat_selection(user.formatters)
+#<user.formatters> that: user.formatters_reformat_selection(user.formatters)
 word <user.word>: user.insert_with_history(user.word)
 #{user.prose_formatter} word <user.word>: user.insert_formatted(user.word, prose_formatter)
 cap word <user.word>: user.insert_formatted(user.word, "title")

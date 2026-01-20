@@ -20,6 +20,8 @@ marvin: "mv "
 
 make dir: "mkdir "
 
+see make: "cmake "
+
 zulu [<user.text>]: "z {text}"
 
 copy paste:

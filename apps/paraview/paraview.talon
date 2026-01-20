@@ -49,3 +49,11 @@ time step first:
     mouse_click(0)
     sleep(0.05)
     user.mouse_helper_position_restore()
+
+reload python:
+    key(cmd-r)
+    mouse_move(1085.94921875, 567.3359375)
+    sleep(0.45)
+    mouse_click(0)
+    sleep(3)
+    user.menu_select('File|Recent Files|/Users/caleb/sweeps/IETC.py')

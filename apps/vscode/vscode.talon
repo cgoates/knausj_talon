@@ -223,6 +223,9 @@ preview markdown: user.vscode("markdown.showPreview")
 increment <user.cursorless_target>:
     user.cursorless_vscode_command("editor.emmet.action.incrementNumberByOne", cursorless_target)
 
+decrement <user.cursorless_target>:
+    user.cursorless_vscode_command("editor.emmet.action.decrementNumberByOne", cursorless_target)
+
 search next: key(f4)
 search previous: key(shift-f4)
 
@@ -231,6 +234,6 @@ other file: user.vscode("C_Cpp.SwitchHeaderSource")
 buffer: user.vscode("workbench.action.showAllEditorsByMostRecentlyUsed")
 
 fallback:
-    key(ctrl-p ctrl-p)
+    key(cmd-p cmd-p)
 
 window jump: user.vscode("workbench.action.switchWindow")
